@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TEST — Formulario B2C Particulares</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; padding: 20px; background: #f0f4f8; }
+
+    :root {
+      --escl-navy:       #002B49;
+      --escl-navy-light: #003d66;
+      --escl-blue:       #0077b6;
+      --escl-green:      #22c55e;
+      --escl-green-dark: #16a34a;
+      --escl-green-light:#dcfce7;
+      --escl-gray:       #6b7a8d;
+      --escl-gray-light: #94a3b8;
+      --escl-red:        #ef4444;
+      --escl-red-light:  #fef2f2;
+      --escl-bg:         #f5f7fa;
+      --escl-white:      #ffffff;
+    }
+
+    .escl-form-wrapper *, .escl-form-wrapper *::before, .escl-form-wrapper *::after {
+      box-sizing: border-box !important;
+      font-family: 'DM Sans', -apple-system, sans-serif !important;
+    }
+    .escl-form-wrapper { max-width: 1060px; margin: 40px auto; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,43,73,.08); }
+    .escl-form-inner { display: grid !important; grid-template-columns: 1fr 1.15fr; min-height: 540px; }
+
+    .escl-form-panel-left { background: var(--escl-navy) !important; padding: 56px 44px !important; display: flex !important; flex-direction: column !important; justify-content: center !important; position: relative !important; overflow: hidden !important; }
+    .escl-form-panel-left::before { content: '' !important; position: absolute; bottom: -60px; left: -60px; width: 250px; height: 250px; border-radius: 50%; background: radial-gradient(circle, rgba(34,197,94,.12), transparent 70%); pointer-events: none; }
+    .escl-form-panel-left::after { content: '' !important; position: absolute; top: -30px; right: -30px; width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle, rgba(0,119,182,.1), transparent 70%); pointer-events: none; }
+    .escl-form-left-content { position: relative !important; z-index: 1 !important; }
+    .escl-form-left-badge { display: inline-flex !important; align-items: center !important; gap: 6px !important; font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: .08em !important; color: var(--escl-green) !important; background: rgba(34,197,94,.12) !important; padding: 4px 12px !important; border-radius: 6px !important; margin-bottom: 20px !important; border: none !important; }
+    .escl-form-left-badge svg { width: 14px !important; height: 14px !important; }
+    .escl-form-panel-left h2 { font-size: 30px !important; font-weight: 800 !important; color: white !important; line-height: 1.2 !important; margin-bottom: 16px !important; margin-top: 0 !important; padding: 0 !important; border: none !important; }
+    .escl-form-panel-left h2 em { font-style: normal !important; background: linear-gradient(135deg, #34d399, #0ea5e9) !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; background-clip: text !important; }
+    .escl-form-desc { font-size: 15px !important; color: rgba(255,255,255,.55) !important; line-height: 1.65 !important; margin-bottom: 32px !important; }
+    .escl-trust-signals { display: flex !important; flex-direction: column !important; gap: 12px !important; }
+    .escl-trust-item { display: flex !important; align-items: center !important; gap: 12px !important; }
+    .escl-trust-icon { width: 36px !important; height: 36px !important; border-radius: 10px !important; display: flex !important; align-items: center !important; justify-content: center !important; flex-shrink: 0 !important; background: rgba(255,255,255,.06) !important; border: 1px solid rgba(255,255,255,.08) !important; }
+    .escl-trust-icon svg { width: 18px !important; height: 18px !important; color: var(--escl-green) !important; }
+    .escl-trust-text { font-size: 13.5px !important; color: rgba(255,255,255,.65) !important; line-height: 1.4 !important; }
+    .escl-trust-text strong { color: white !important; font-weight: 600 !important; }
+
+    .escl-form-panel-right { background: var(--escl-white) !important; padding: 44px 40px !important; display: flex !important; flex-direction: column !important; justify-content: center !important; }
+    .escl-form-panel-right h3 { font-size: 20px !important; font-weight: 800 !important; color: var(--escl-navy) !important; margin-bottom: 6px !important; margin-top: 0 !important; padding: 0 !important; border: none !important; }
+    .escl-form-sub { font-size: 13.5px !important; color: var(--escl-gray) !important; margin-bottom: 28px !important; line-height: 1.5 !important; }
+
+    .escl-form-group { margin-bottom: 16px !important; padding: 0 !important; }
+    .escl-form-label { display: block !important; font-size: 12.5px !important; font-weight: 600 !important; color: var(--escl-navy) !important; margin-bottom: 6px !important; margin-top: 0 !important; line-height: normal !important; letter-spacing: .01em !important; float: none !important; padding: 0 !important; }
+    .escl-form-input { width: 100% !important; padding: 13px 16px !important; border-radius: 10px !important; border: 1.5px solid rgba(0,43,73,.1) !important; background: var(--escl-bg) !important; font-size: 14px !important; color: var(--escl-navy) !important; outline: none !important; transition: all .25s !important; height: auto !important; line-height: normal !important; box-shadow: none !important; -webkit-appearance: none !important; appearance: none !important; display: block !important; margin: 0 !important; }
+    .escl-form-input::placeholder { color: var(--escl-gray-light) !important; }
+    .escl-form-input:focus { border-color: var(--escl-blue) !important; box-shadow: 0 0 0 3px rgba(0,119,182,.1) !important; background: var(--escl-white) !important; }
+    .escl-form-select { cursor: pointer !important; -webkit-appearance: none !important; appearance: none !important; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236b7a8d' viewBox='0 0 12 12'%3E%3Cpath d='M3 5l3 3 3-3'/%3E%3C/svg%3E") !important; background-repeat: no-repeat !important; background-position: right 14px center !important; padding-right: 36px !important; }
+    .escl-field-error { font-size: 11.5px !important; color: var(--escl-red) !important; margin-top: 4px !important; display: none !important; }
+    .escl-form-group.escl-has-error .escl-field-error { display: block !important; }
+    .escl-form-group.escl-has-error .escl-form-input { border-color: var(--escl-red) !important; box-shadow: 0 0 0 3px rgba(239,68,68,.1) !important; }
+    .escl-form-row { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+
+    .escl-form-consent { display: flex !important; align-items: flex-start !important; gap: 10px !important; margin: 8px 0 4px !important; }
+    .escl-form-consent input[type="checkbox"] { width: 18px !important; height: 18px !important; margin-top: 2px !important; flex-shrink: 0 !important; accent-color: var(--escl-green) !important; cursor: pointer !important; }
+    .escl-form-consent label { font-size: 12px !important; color: var(--escl-gray) !important; line-height: 1.5 !important; cursor: pointer !important; font-weight: normal !important; }
+    .escl-form-consent label a { color: var(--escl-blue) !important; text-decoration: none !important; }
+
+    .escl-form-submit-btn { width: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 8px !important; padding: 15px 24px !important; border-radius: 12px !important; background: var(--escl-green) !important; color: white !important; font-size: 15px !important; font-weight: 700 !important; border: none !important; cursor: pointer !important; letter-spacing: .01em !important; transition: all .25s !important; box-shadow: 0 4px 16px rgba(34,197,94,.25) !important; margin-top: 6px !important; }
+    .escl-form-submit-btn:hover:not(:disabled) { background: var(--escl-green-dark) !important; transform: translateY(-2px) !important; }
+    .escl-form-submit-btn:disabled { opacity: .65 !important; cursor: not-allowed !important; transform: none !important; }
+    .escl-form-submit-btn svg { width: 18px !important; height: 18px !important; }
+    .escl-btn-spinner { display: none !important; width: 18px !important; height: 18px !important; border: 2.5px solid rgba(255,255,255,.3) !important; border-top-color: white !important; border-radius: 50% !important; animation: esclSpin .6s linear infinite !important; }
+    @keyframes esclSpin { to { transform: rotate(360deg); } }
+    .escl-form-submit-btn.escl-loading .escl-btn-text { display: none !important; }
+    .escl-form-submit-btn.escl-loading .escl-btn-icon { display: none !important; }
+    .escl-form-submit-btn.escl-loading .escl-btn-spinner { display: block !important; }
+    .escl-form-privacy { text-align: center !important; font-size: 11.5px !important; color: var(--escl-gray-light) !important; margin-top: 14px !important; line-height: 1.5 !important; }
+
+    .escl-form-success { display: none !important; text-align: center !important; padding: 20px 0 !important; }
+    .escl-form-success.escl-visible { display: block !important; }
+    .escl-success-icon { width: 64px !important; height: 64px !important; border-radius: 50% !important; background: var(--escl-green-light) !important; display: flex !important; align-items: center !important; justify-content: center !important; margin: 0 auto 20px !important; }
+    .escl-success-icon svg { width: 30px !important; height: 30px !important; color: var(--escl-green-dark) !important; }
+    .escl-form-success h3 { font-size: 22px !important; font-weight: 800 !important; color: var(--escl-navy) !important; margin-bottom: 8px !important; }
+    .escl-form-success p { font-size: 14.5px !important; color: var(--escl-gray) !important; line-height: 1.6 !important; max-width: 320px !important; margin: 0 auto !important; }
+    .escl-success-phone { display: inline-flex !important; align-items: center !important; gap: 6px !important; margin-top: 20px !important; padding: 10px 20px !important; border-radius: 10px !important; background: var(--escl-bg) !important; border: 1px solid rgba(0,43,73,.08) !important; font-size: 14px !important; font-weight: 600 !important; color: var(--escl-navy) !important; text-decoration: none !important; }
+    .escl-success-phone svg { width: 16px !important; height: 16px !important; color: var(--escl-green) !important; }
+
+    .escl-error-banner { display: none !important; background: var(--escl-red-light) !important; border: 1px solid rgba(239,68,68,.2) !important; border-radius: 10px !important; padding: 12px 16px !important; margin-bottom: 16px !important; font-size: 13px !important; color: var(--escl-red) !important; line-height: 1.5 !important; align-items: center !important; gap: 8px !important; }
+    .escl-error-banner.escl-visible { display: flex !important; }
+    .escl-error-banner svg { width: 16px !important; height: 16px !important; flex-shrink: 0 !important; }
+
+    @media (max-width: 768px) {
+      .escl-form-wrapper { margin: 20px 16px !important; border-radius: 14px !important; }
+      .escl-form-inner { grid-template-columns: 1fr !important; }
+      .escl-form-panel-left { padding: 36px 28px !important; }
+      .escl-form-panel-left h2 { font-size: 24px !important; }
+      .escl-form-panel-right { padding: 32px 28px !important; }
+      .escl-form-row { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="escl-form-wrapper">
+  <div class="escl-form-inner">
+
+    <div class="escl-form-panel-left">
+      <div class="escl-form-left-content">
+        <div class="escl-form-left-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Soluciones para particulares
+        </div>
+        <h2>Empieza a <em>pagar menos</em><br>por la energía de tu hogar</h2>
+        <p class="escl-form-desc">Solar, baterías, aerotermia o punto de recarga. Te asesoramos sobre la mejor solución para tu hogar, sin compromiso.</p>
+        <div class="escl-trust-signals">
+          <div class="escl-trust-item">
+            <div class="escl-trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+            <div class="escl-trust-text"><strong>Hasta -70% en tu factura</strong> de la luz</div>
+          </div>
+          <div class="escl-trust-item">
+            <div class="escl-trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div class="escl-trust-text"><strong>Garantía de hasta 30 años</strong> en componentes</div>
+          </div>
+          <div class="escl-trust-item">
+            <div class="escl-trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+            <div class="escl-trust-text"><strong>Financiación disponible</strong> adaptada a tu caso</div>
+          </div>
+          <div class="escl-trust-item">
+            <div class="escl-trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div class="escl-trust-text"><strong>Respuesta en 48h</strong> por un asesor de tu zona</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="escl-form-panel-right">
+      <div id="formContent">
+        <h3>Pide tu presupuesto gratuito</h3>
+        <p class="escl-form-sub">Rellena el formulario y te asesoramos sobre la mejor solución para tu hogar.</p>
+
+        <div class="escl-error-banner" id="errorBanner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span id="errorMessage">Ha habido un error al enviar el formulario. Por favor, inténtalo de nuevo.</span>
+        </div>
+
+        <div id="escalaFormContainer">
+          <div class="escl-form-row">
+            <div class="escl-form-group" data-field="firstname">
+              <label class="escl-form-label">Nombre *</label>
+              <input type="text" class="escl-form-input" id="firstname" placeholder="Tu nombre">
+              <div class="escl-field-error">Introduce tu nombre</div>
+            </div>
+            <div class="escl-form-group" data-field="lastname">
+              <label class="escl-form-label">Apellidos *</label>
+              <input type="text" class="escl-form-input" id="lastname" placeholder="Tus apellidos">
+              <div class="escl-field-error">Introduce tus apellidos</div>
+            </div>
+          </div>
+          <div class="escl-form-row">
+            <div class="escl-form-group" data-field="email">
+              <label class="escl-form-label">Email *</label>
+              <input type="email" class="escl-form-input" id="email" placeholder="tu@email.com">
+              <div class="escl-field-error">Introduce un email válido</div>
+            </div>
+            <div class="escl-form-group" data-field="phone">
+              <label class="escl-form-label">Teléfono *</label>
+              <input type="tel" class="escl-form-input" id="phone" placeholder="600 000 000">
+              <div class="escl-field-error">Introduce tu teléfono</div>
+            </div>
+          </div>
+          <div class="escl-form-row">
+            <div class="escl-form-group" data-field="poblacion">
+              <label class="escl-form-label">Población *</label>
+              <input type="text" class="escl-form-input" id="poblacion" placeholder="¿Dónde está tu vivienda?">
+              <div class="escl-field-error">Introduce tu población</div>
+            </div>
+            <div class="escl-form-group" data-field="provincia">
+              <label class="escl-form-label">Provincia *</label>
+              <input type="text" class="escl-form-input" id="provincia" placeholder="Tu provincia">
+              <div class="escl-field-error">Introduce tu provincia</div>
+            </div>
+          </div>
+          <div class="escl-form-row">
+            <div class="escl-form-group" data-field="productoInteresado">
+              <label class="escl-form-label">¿Qué te interesa? *</label>
+              <select class="escl-form-input escl-form-select" id="productoInteresado">
+                <option value="" disabled selected>Selecciona</option>
+                <option value="Placas">Autoconsumo solar</option>
+                <option value="Bateria">Baterías</option>
+                <option value="Aerotermia">Aerotermia</option>
+                <option value="Puntos de Carga">Punto de recarga</option>
+                <option value="Consultoría">Consultoría energética</option>
+                <option value="General">No lo tengo claro</option>
+              </select>
+              <div class="escl-field-error">Selecciona una opción</div>
+            </div>
+            <div class="escl-form-group" data-field="tipoVivienda">
+              <label class="escl-form-label">Tipo de vivienda</label>
+              <select class="escl-form-input escl-form-select" id="tipoVivienda">
+                <option value="" disabled selected>Selecciona</option>
+                <option value="casa_unifamiliar">Casa / Chalet</option>
+                <option value="adosado">Adosado / Pareado</option>
+                <option value="piso">Piso</option>
+                <option value="masia">Masía / Casa rural</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="escl-form-group" data-field="consent">
+            <div class="escl-form-consent">
+              <input type="checkbox" id="rgpdConsent">
+              <label for="rgpdConsent">Acepto la <a href="https://escalarenovables.com/es/politica-de-privacidad" target="_blank">política de privacidad</a> de Escala Renovables. *</label>
+            </div>
+            <div class="escl-field-error">Debes aceptar la política de privacidad</div>
+          </div>
+
+          <div class="escl-form-group">
+            <div class="escl-form-consent">
+              <input type="checkbox" id="marketingConsent">
+              <label for="marketingConsent">Acepto recibir comunicaciones comerciales de Escala Renovables.</label>
+            </div>
+          </div>
+
+          <button type="button" class="escl-form-submit-btn" id="submitBtn">
+            <svg class="escl-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            <span class="escl-btn-text">Solicitar presupuesto gratuito</span>
+            <div class="escl-btn-spinner"></div>
+          </button>
+        </div>
+
+        <p class="escl-form-privacy">No compartiremos tus datos con terceros. Solo los usaremos para contactarte.</p>
+      </div>
+
+      <div class="escl-form-success" id="formSuccess">
+        <div class="escl-success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>¡Solicitud enviada!</h3>
+        <p>Un asesor de tu zona te contactará en menos de 48 horas para asesorarte sin compromiso.</p>
+        <a href="tel:+34873631208" class="escl-success-phone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          ¿Prefieres llamarnos? 873 631 208
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+const HUBSPOT_CONFIG = {
+  portalId: '146794112',
+  formGuid: '34410179-673e-46ac-84af-0b87dc39079c',
+  get endpoint() {
+    return `https://api-eu1.hsforms.com/submissions/v3/integration/submit/${this.portalId}/${this.formGuid}`;
+  }
+};
+
+function detectLanguage() { return window.location.pathname.startsWith('/ca/') ? 'ca' : 'es'; }
+function getUTMParams() {
+  const params = new URLSearchParams(window.location.search);
+  const utmFields = {};
+  ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(key => { const val = params.get(key); if (val) utmFields[key] = val; });
+  return utmFields;
+}
+function getHubSpotCookie() { const match = document.cookie.match(/(?:^|;\s*)hubspotutk=([^;]*)/); return match ? match[1] : null; }
+function isValidEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+function isValidPhone(phone) { return phone.replace(/\D/g, '').length >= 9; }
+
+function clearErrors() {
+  document.querySelectorAll('.escl-form-group.escl-has-error').forEach(g => g.classList.remove('escl-has-error'));
+}
+function setFieldError(fieldName) {
+  const group = document.querySelector(`.escl-form-group[data-field="${fieldName}"]`);
+  if (group) group.classList.add('escl-has-error');
+}
+function validateForm() {
+  clearErrors(); let valid = true;
+  if (!document.getElementById('firstname').value.trim() || document.getElementById('firstname').value.trim().length < 2) { setFieldError('firstname'); valid = false; }
+  if (!document.getElementById('lastname').value.trim() || document.getElementById('lastname').value.trim().length < 2) { setFieldError('lastname'); valid = false; }
+  if (!isValidEmail(document.getElementById('email').value.trim())) { setFieldError('email'); valid = false; }
+  if (!isValidPhone(document.getElementById('phone').value.trim())) { setFieldError('phone'); valid = false; }
+  if (!document.getElementById('poblacion').value.trim() || document.getElementById('poblacion').value.trim().length < 2) { setFieldError('poblacion'); valid = false; }
+  if (!document.getElementById('provincia').value.trim() || document.getElementById('provincia').value.trim().length < 2) { setFieldError('provincia'); valid = false; }
+  const productoEl = document.getElementById('productoInteresado');
+  if (productoEl && productoEl.tagName === 'SELECT' && !productoEl.value) { setFieldError('productoInteresado'); valid = false; }
+  if (!document.getElementById('rgpdConsent').checked) { setFieldError('consent'); valid = false; }
+  return valid;
+}
+
+document.querySelectorAll('.escl-form-input').forEach(input => {
+  input.addEventListener('input', () => { const g = input.closest('.escl-form-group'); if (g) g.classList.remove('escl-has-error'); });
+  input.addEventListener('change', () => { const g = input.closest('.escl-form-group'); if (g) g.classList.remove('escl-has-error'); });
+});
+document.getElementById('rgpdConsent').addEventListener('change', () => {
+  const g = document.querySelector('.escl-form-group[data-field="consent"]'); if (g) g.classList.remove('escl-has-error');
+});
+
+async function submitToHubSpot(formData) {
+  const utms = getUTMParams();
+  const hutk = getHubSpotCookie();
+  const payload = {
+    submittedAt: Date.now().toString(),
+    fields: [
+      { objectTypeId: '0-1', name: 'firstname', value: formData.firstname },
+      { objectTypeId: '0-1', name: 'lastname', value: formData.lastname },
+      { objectTypeId: '0-1', name: 'email', value: formData.email },
+      { objectTypeId: '0-1', name: 'phone', value: formData.phone },
+      { objectTypeId: '0-1', name: 'poblacion', value: formData.poblacion },
+      { objectTypeId: '0-1', name: 'provincia', value: formData.provincia },
+      { objectTypeId: '0-1', name: 'hs_language', value: formData.language },
+      { objectTypeId: '0-1', name: 'producto_interesado', value: formData.productoInteresado },
+      { objectTypeId: '0-1', name: 'tipo_de_contacto_fiscal', value: 'persona fisica' },
+      ...(formData.tipoVivienda ? [{ objectTypeId: '0-1', name: 'tipo_de_vivienda', value: formData.tipoVivienda }] : []),
+      ...(utms.utm_source   ? [{ objectTypeId: '0-1', name: 'utm_source',   value: utms.utm_source   }] : []),
+      ...(utms.utm_medium   ? [{ objectTypeId: '0-1', name: 'utm_medium',   value: utms.utm_medium   }] : []),
+      ...(utms.utm_campaign ? [{ objectTypeId: '0-1', name: 'utm_campaign', value: utms.utm_campaign }] : []),
+    ],
+    legalConsentOptions: {
+      consent: {
+        consentToProcess: true,
+        text: 'Acepto la política de privacidad de datos.',
+        communications: [
+          {
+            value: document.getElementById('marketingConsent').checked,
+            subscriptionTypeId: 123274920,
+            text: 'Acepto recibir otras comunicaciones de Escala Renovables.'
+          }
+        ]
+      }
+    },
+    context: {
+      pageUri: window.location.href,
+      pageName: document.title,
+      ...(hutk ? { hutk } : {})
+    }
+  };
+  const response = await fetch(HUBSPOT_CONFIG.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+  if (!response.ok) { const err = await response.json().catch(() => ({})); throw new Error(err.message || `Error ${response.status}`); }
+  return response.json();
+}
+
+document.getElementById('submitBtn').addEventListener('click', async function() {
+  document.getElementById('errorBanner').classList.remove('escl-visible');
+  if (!validateForm()) return;
+  const formData = {
+    firstname: document.getElementById('firstname').value.trim(),
+    lastname: document.getElementById('lastname').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    phone: document.getElementById('phone').value.trim(),
+    poblacion: document.getElementById('poblacion').value.trim(),
+    provincia: document.getElementById('provincia').value.trim(),
+    productoInteresado: document.getElementById('productoInteresado').value,
+    tipoVivienda: document.getElementById('tipoVivienda') ? document.getElementById('tipoVivienda').value : '',
+    language: detectLanguage(),
+  };
+  const btn = document.getElementById('submitBtn');
+  btn.classList.add('escl-loading'); btn.disabled = true;
+  try {
+    await submitToHubSpot(formData);
+    document.getElementById('formContent').style.display = 'none';
+    document.getElementById('formSuccess').classList.add('escl-visible');
+  } catch (error) {
+    console.error('HubSpot submission error:', error);
+    document.getElementById('errorMessage').textContent = 'Ha habido un error al enviar el formulario. Por favor, inténtalo de nuevo o llámanos al 873 631 208.';
+    document.getElementById('errorBanner').classList.add('escl-visible');
+    btn.classList.remove('escl-loading'); btn.disabled = false;
+  }
+});
+
+});
+</script>
+</body>
+</html>
